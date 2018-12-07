@@ -1,22 +1,33 @@
 public class Sort
 {
-  public static void selectionSort(int[] ary)
+  public static void bubbleSort(int[] ary)
   {
-    int[] min = new int[2];
-    for(int i = 0; i < ary.length; i++)
+    int hold = 0;
+    boolean check = false;
+    while(!check)
     {
-      min[0] = ary[ary.length - 1];
-      min[1] = ary.length - 1;
-      for(int j = i; j < ary.length; j++)
+      check = true;
+      for(int i = 0; i < ary.length - 1; i++)
       {
-        if(ary[j] < min[0])
+        if(ary[i] > ary[i + 1])
         {
-          min[0] = ary[j];
-          min[1] = j;
+          check = false;
+          hold = ary[i];
+          ary[i] = ary[i + 1];
+          ary[i + 1] = hold;
         }
       }
-      ary[min[1]] = ary[i];
-      ary[i] = min[0];
+    }
+    System.out.println(ary.toString());
+  }
+
+  public static void main(String[] args)
+  {
+    int[] nAry = new int[10];
+
+    for(int i = 0; i < 10; i++)
+    {
+
     }
   }
 }
