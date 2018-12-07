@@ -1,5 +1,26 @@
+import java.util.Random;
 public class Sort
 {
+  public static void selectionSort(int[] ary)
+  {
+    int[] min = new int[2];
+    for(int i = 0; i < ary.length; i++)
+    {
+      min[0] = ary[ary.length - 1];
+      min[1] = ary.length - 1;
+      for(int j = i; j < ary.length; j++)
+      {
+        if(ary[j] < min[0])
+        {
+          min[0] = ary[j];
+          min[1] = j;
+        }
+      }
+      ary[min[1]] = ary[i];
+      ary[i] = min[0];
+    }
+    //System.out.println(toString(ary));
+  }
   public static void bubbleSort(int[] ary)
   {
     int hold = 0;
@@ -7,7 +28,7 @@ public class Sort
     while(!check)
     {
       check = true;
-      for(int i = 0; i < ary.length - 1; i++)
+      for(int i = 0; i < ary.length- 1; i++)
       {
         if(ary[i] > ary[i + 1])
         {
@@ -16,18 +37,46 @@ public class Sort
           ary[i] = ary[i + 1];
           ary[i + 1] = hold;
         }
+        if(ary[i + 1] < ary[i])
+        {
+          check = false;
+          hold = ary[i];
+          ary[i] = ary[i + 1];
+          ary[i + 1] = hold;
+        }
       }
     }
-    System.out.println(ary.toString());
+    //System.out.println(toString(ary));
   }
-
+  public static String toString(int[] ary)
+  {
+    String output = "[";
+    for(int i = 0; i < ary.length; i++)
+    {
+      output += (" " + ary[i]);
+    }
+    output += "]";
+    return output;
+  }
   public static void main(String[] args)
   {
-    int[] nAry = new int[10];
 
-    for(int i = 0; i < 10; i++)
+    Random randgen = new Random();
+    int[] nAry = new int[Integer.parseInt(args[0])];
+    for(int i = 0; i < Integer.parseInt(args[0]); i++)
     {
-
+      nAry[i] = randgen.nextInt() % 100;
     }
+    long start = System.currentTimeMillis();
+    bubbleSort(nAry);
+    long elapsedTimeMillis = System.currentTimeMillis()-start;
+    System.out.println(elapsedTimeMillis);
+    start = System.currentTimeMillis();
+    selectionSort(nAry);
+    elapsedTimeMillis = System.currentTimeMillis()-start;
+    System.out.println(elapsedTimeMillis);
+
+
   }
+
 }
