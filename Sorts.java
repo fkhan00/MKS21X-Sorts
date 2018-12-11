@@ -1,5 +1,5 @@
 import java.util.Random;
-import java.util.Arrays;
+import java.util.ArrayList;
 public class Sorts
 {
   public static void selectionSort(int[] ary)
@@ -21,25 +21,6 @@ public class Sorts
       ary[i] = min[0];
     }
     //System.out.println(toString(ary));
-  }
-
-  public static void insertionSort(int[] ary)
-  {
-    ArrayList<Integer> arList = new ArrayList<Integer>(ary.length);
-    for(int i = 0; i < ary.length; i++)
-    {
-      for(int j = 0; j < arList.size(); j ++)
-      {
-        if(ary[i] > arList.get(i))
-        {
-          arList.add(j, ary[i]);
-        }
-      }
-    }
-    for(int i = 0; i < ary.length; i++)
-    {
-      ary[i] = arList.get(i);
-    }
   }
   public static void bubbleSort(int[] ary)
   {
@@ -68,6 +49,24 @@ public class Sorts
     }
     //System.out.println(toString(ary));
   }
+  public static void insertionSort(int[] ary)
+  {
+    int c = 0;
+    int place = 0;
+    for(int i = 1; i < ary.length; i++)
+    {
+      place = ary[i];
+      c = i - 1;
+      while(c >= 0 && place <= ary[c])
+      {
+        ary[c + 1] = ary[c];
+        c--;
+      }
+      ary[c + 1] = place;
+    }
+}
+
+
   public static String toString(int[] ary)
   {
     String output = "[";
@@ -78,36 +77,27 @@ public class Sorts
     output += "]";
     return output;
   }
-  public static void main(String[]artie){
 
-    int[] randish = new int[Integer.parseInt(artie[0])];
-    for(int i = 0 ; i < randish.length; i++){
-      randish[i] =(int)(Math.random()*10000);
-    }
-
-    if(artie[1].equals("selection")){
-      Sorts.selectionSort(randish);
-    }
-    if(artie[1].equals("bubble")){
-      Sorts.bubbleSort(randish);
-    }
-    if(artie[1].equals("test")){
-      int[] randish2 = Arrays.copyOf(randish,randish.length);
-      int[] randish3 = Arrays.copyOf(randish,randish.length);
-      Sorts.selectionSort(randish);
-      Sorts.bubbleSort(randish2);
-      Arrays.sort(randish3);
-      if( Arrays.equals(randish,randish3)){
-        System.out.println("Selection Correct!");
-      }else{
-       System.out.println("Selection BROKEN!!!!");
-      }
-      if( Arrays.equals(randish2,randish3)){
-        System.out.println("Bubble Correct!");
-      }else{
-       System.out.println("Bubble BROKEN!!!!");
-      }
-    }
-  }
-
+  // public static void main(String[] args)
+  // {
+  //
+  //   Random randgen = new Random();
+  //   int[] nAry = new int[Integer.parseInt(args[0])];
+  //   for(int i = 0; i < Integer.parseInt(args[0]); i++)
+  //   {
+  //     nAry[i] = randgen.nextInt() % 100;
+  //   }
+  //    //long start = System.currentTimeMillis();
+  //    //bubbleSort(nAry);
+  //   //long elapsedTimeMillis = System.currentTimeMillis()-start;
+  //    //System.out.println(elapsedTimeMillis);
+  //   long start = System.currentTimeMillis();
+  //   selectionSort(nAry);
+  //   long elapsedTimeMillis = System.currentTimeMillis()-start;
+  //   System.out.println(elapsedTimeMillis);
+  //   start = System.currentTimeMillis();
+  //   insertionSort(nAry);
+  //   elapsedTimeMillis = System.currentTimeMillis()-start;
+  //   System.out.println(elapsedTimeMillis);
+  //   }
 }
